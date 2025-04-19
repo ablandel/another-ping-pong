@@ -24,7 +24,7 @@ The server used as client can be run using `maven`:
 ./mvnw -pl another-ping spring-boot:run
 ```
 
-### Docker image build
+## Docker image build
 
 For the moment, the Docker image are not pushed and need to be locally built.
 
@@ -47,7 +47,7 @@ docker build -t another-ping:local -f ./another-ping/Dockerfile .
 Build the server image:
 
 ```shell
-./mvnw  -pl another-pong -Pnative -Dspring-boot.build-image.imageName=another-pong:local spring-boot:build-image
+./mvnw -pl another-pong -Pnative -Dspring-boot.build-image.imageName=another-pong:local spring-boot:build-image
 ```
 
 Build the client image:
