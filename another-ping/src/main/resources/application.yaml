@@ -1,0 +1,23 @@
+spring:
+  ssl:
+    bundle:
+      jks:
+        mtls-bundle:
+          keystore:
+            location: file:/tmp/local-client-keystore.p12
+            password: changeme
+            type: PKCS12
+          truststore:
+            location: file:/tmp/local-client-truststore.p12
+            password: changeme
+            type: PKCS12
+logging:
+  file:
+    name: another-ping.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: another-ping-%d{yyyy-MM-dd}.%i.log
+      max-file-size: 100KB
+      max-history: 5
+pong-server:
+  base-url: https://localhost:8443

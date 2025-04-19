@@ -1,0 +1,30 @@
+services:
+  another-pong:
+    container_name: another-pong
+    image: another-pong:local
+    restart: always
+    environment:
+      server.ssl.key-store: file:/app/keystore.p12
+      server.ssl.trust-store: file:/app/truststore.p12
+    volumes:
+      - /tmp/compose-server-keystore.p12:/app/keystore.p12
+      - /tmp/compose-server-truststore.p12:/app/truststore.p12
+  another-ping:
+    container_name: another-ping
+    image: another-ping:local
+    restart: always
+    environment:
+      pong-server.base-url: https://another-pong:8443
+      spring.ssl.bundle.jks.mtls-bundle.keystore.location: file:/app/keystore.p12
+      spring.ssl.bundle.jks.mtls-bundle.truststore.location: file:/app/truststore.p12
+    volumes:
+      - /tmp/compose-client-keystore.p12:/app/keystore.p12
+      - /tmp/compose-client-truststore.p12:/app/truststore.p12
+  curl:
+    container_name: curl-client
+    image: curlimages/curl:8.13.0
+    command: sh -c "while true; do curl -s https://another-pong:8443/api/v1/pong --cacert /home/curl_user/ca.crt --cert /home/curl_user/client.crt --key /home/curl_user/client.key; sleep 2; done"
+    volumes:
+      - /tmp/compose-ca.crt:/home/curl_user/ca.crt
+      - /tmp/compose-client.crt:/home/curl_user/client.crt
+      - /tmp/compose-client.key:/home/curl_user/client.key

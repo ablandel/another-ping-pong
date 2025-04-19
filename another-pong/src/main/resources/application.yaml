@@ -1,0 +1,21 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store: file:/tmp/local-server-keystore.p12
+    key-store-password: changeme
+    key-store-type: PKCS12
+    key-alias: server-alias
+    trust-store: file:/tmp/local-server-truststore.p12
+    trust-store-password: changeme
+    trust-store-type: PKCS12
+  servlet:
+    context-path: /api/
+logging:
+  file:
+    name: another-pong.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: another-pong-%d{yyyy-MM-dd}.%i.log
+      max-file-size: 100KB
+      max-history: 5
