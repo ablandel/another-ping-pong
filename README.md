@@ -18,7 +18,7 @@ The server can be run using `maven`:
 
 ## Start the client
 
-The server used as client can be run using `maven`:
+The client can be run using `maven`:
 
 ```shell
 ./mvnw -pl another-ping spring-boot:run
