@@ -8,6 +8,14 @@ To easier the tests, the certificates can be generated via the scripts defined i
 directory for the local and/or the compose setups. The certificates and keystore/truststore are then copied to the
 `/tmp` directory after generation.
 
+## Tracing
+
+A `Zipkin` instance can be run using the `compose` setup to follow the request traces:
+
+```shell
+ docker compose up zipkin
+```
+
 ## Start the server
 
 The server can be run using `maven`:

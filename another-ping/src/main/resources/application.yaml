@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: another-ping
+  main:
+    web-application-type: none
   ssl:
     bundle:
       jks:
@@ -21,3 +25,11 @@ logging:
       max-history: 5
 pong-server:
   base-url: https://localhost:8443
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans

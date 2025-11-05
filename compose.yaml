@@ -6,6 +6,7 @@ services:
     environment:
       server.ssl.key-store: file:/app/keystore.p12
       server.ssl.trust-store: file:/app/truststore.p12
+      management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
     volumes:
       - /tmp/compose-server-keystore.p12:/app/keystore.p12
       - /tmp/compose-server-truststore.p12:/app/truststore.p12
@@ -17,6 +18,7 @@ services:
       pong-server.base-url: https://another-pong:8443
       spring.ssl.bundle.jks.mtls-bundle.keystore.location: file:/app/keystore.p12
       spring.ssl.bundle.jks.mtls-bundle.truststore.location: file:/app/truststore.p12
+      management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
     volumes:
       - /tmp/compose-client-keystore.p12:/app/keystore.p12
       - /tmp/compose-client-truststore.p12:/app/truststore.p12
@@ -28,3 +30,8 @@ services:
       - /tmp/compose-ca.crt:/home/curl_user/ca.crt
       - /tmp/compose-client.crt:/home/curl_user/client.crt
       - /tmp/compose-client.key:/home/curl_user/client.key
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin-slim:3.5.1
+    ports:
+      - 9411:9411

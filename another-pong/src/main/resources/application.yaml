@@ -19,3 +19,14 @@ logging:
       file-name-pattern: another-pong-%d{yyyy-MM-dd}.%i.log
       max-file-size: 100KB
       max-history: 5
+spring:
+  application:
+    name: another-pong
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
